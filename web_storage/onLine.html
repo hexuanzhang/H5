@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>离线检测</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link href="" rel="stylesheet">
+    </head>
+    <body>
+        当前网络状态：<em id="status"></em>
+        <script>
+            var oStatus = document.getElementById("status"),
+                sOnline = window.navigator.onLine? "在线" : "离线";
+            oStatus.innerText = sOnline;
+
+            // 监听onLine和offLine事件
+            if(document.addEventListener){
+                window.addEventListener("offline",function(e){
+                    console.dir(e);
+                    oStatus.innerText = "离线";
+                    console.log("当前网络已断开链接。");
+                });
+                window.addEventListener("online",function(e){
+                    oStatus.innerText = "在线";
+                    console.log("当前网络已恢复链接。");
+                });
+            } else {
+                window.attachEvent("onoffline",function(e){
+                    console.dir(e);
+                    oStatus.innerText = "离线";
+                    console.log("当前网络已断开链接。");
+                });
+                window.attachEvent("ononline",function(e){
+                    oStatus.innerText = "在线";
+                    console.log("当前网络已恢复链接。");
+                });
+                // 兼容IE8, IE8只支持在body上绑定onLine和offLine事件
+                document.body.attachEvent("onoffline",function(e){
+                    console.dir(e);
+                    oStatus.innerText = "离线";
+                    console.log("当前网络已断开链接。");
+                });
+                document.body.attachEvent("ononline",function(e){
+                    oStatus.innerText = "在线";
+                    console.log("当前网络已恢复链接。");
+                });
+            }
+        </script>
+    </body>
+</html>
