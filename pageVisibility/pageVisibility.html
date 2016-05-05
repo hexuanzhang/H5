@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>page visibility</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+	</head>
+	<body>
+		<script>
+			window.onload = function(){
+				var sTitle = document.title,
+					sPrefixSupport = "";
+
+			 	function keyWithPrefix(prefix, key) {
+			        if (prefix !== "") {
+			            // 首字母大写
+			            return prefix + key.slice(0,1).toUpperCase() + key.slice(1);    
+			        }
+			        return key;
+			    };
+    			var isPageVisibilitySupport = (function() {
+			        var bSupport = false;
+			        if (typeof window.screenX === "number") { //IE9+
+			            ["webkit", "moz", "ms", "o", ""].forEach(function(prefix) {
+			                if (bSupport == false && document[keyWithPrefix(prefix, "hidden")] != undefined) {
+			                    sPrefixSupport = prefix;
+			                    bSupport = true;   
+			                }
+			            });        
+			        }
+			        return bSupport;
+			    })();
+			    
+				document.addEventListener("visibilitychange", function(e){
+					console.log(document.visibilityState);
+					if(document.hidden) {
+						document.title = "你见， 或者不见我 我就在这里 不悲不喜";
+					} else {
+						document.title = sTitle;
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
