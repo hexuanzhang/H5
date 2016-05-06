@@ -9,39 +9,15 @@
 		<link href="" rel="stylesheet">
 	</head>
 	<body>
+		<script src="js/pageVisibility.js"></script>
 		<script>
-			window.onload = function(){
-				var sTitle = document.title,
-					sPrefixSupport = "";
-
-			 	function keyWithPrefix(prefix, key) {
-			        if (prefix !== "") {
-			            // 首字母大写
-			            return prefix + key.slice(0,1).toUpperCase() + key.slice(1);    
-			        }
-			        return key;
-			    };
-    			var isPageVisibilitySupport = (function() {
-			        var bSupport = false;
-			        if (typeof window.screenX === "number") { //IE9+
-			            ["webkit", "moz", "ms", "o", ""].forEach(function(prefix) {
-			                if (bSupport == false && document[keyWithPrefix(prefix, "hidden")] != undefined) {
-			                    sPrefixSupport = prefix;
-			                    bSupport = true;   
-			                }
-			            });        
-			        }
-			        return bSupport;
-			    })();
-			    
-				document.addEventListener("visibilitychange", function(e){
-					console.log(document.visibilityState);
-					if(document.hidden) {
-						document.title = "你见， 或者不见我 我就在这里 不悲不喜";
-					} else {
-						document.title = sTitle;
-					}
-				})
+			var sTitle = document.title;
+			
+			pageVisibility.visibilityChange(changeTitle);
+			
+			function changeTitle(){
+				console.log(pageVisibility.hidden + "-" + pageVisibility.visibilityState);
+				document.title = pageVisibility.hidden ? "你见， 或者不见我 我就在这里 不悲不喜" : sTitle;
 			}
 		</script>
 	</body>

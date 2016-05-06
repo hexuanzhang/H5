@@ -8,7 +8,7 @@
 (function(window, document, undefined) {
 	"use strict";
 
-	w.pageVisibility = (function() {
+	window.pageVisibility = (function() {
 		var sPrefixSupport = ""; //前缀
 
 		function keyWithPrefix(prefix, key) {
@@ -20,8 +20,8 @@
 		};
 		var isPageVisibilitySupport = (function() {
 			var bSupport = false;
-			if (typeof window.screenX === "number") {
-				["webkit", "moz", ""].forEach(function(prefix) {
+			if (typeof window.screenX === "number") { //IE9+支持screenX属性
+				["", "webkit", "moz"].forEach(function(prefix) {
 					if (bSupport == false && document[keyWithPrefix(prefix, "hidden")] != undefined) {
 						sPrefixSupport = prefix;
 						bSupport = true;
@@ -48,7 +48,7 @@
 		return {
 			hidden: isHidden(),
 			visibilityState: getVisibilityState(),
-			visibilitychange: function(fn, usecapture) {
+			visibilityChange: function(fn, usecapture) {
 				usecapture = usecapture || false;
 				if (isPageVisibilitySupport && typeof fn === "function") {
 					return document.addEventListener(sPrefixSupport + "visibilitychange", function(e) {
