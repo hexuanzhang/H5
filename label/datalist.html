@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>datalist</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style>
+			/* 取消input框右侧下拉箭头 */
+			input::-webkit-calendar-picker-indicator {
+			    display: none;
+			    -webkit-appearance: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			1.option标签支持label属性，在不同浏览器中表现不一致。chrome中label的值在右侧显示，其他浏览器（Firefox、IE9、IE10）会用label值替换value值显示。
+    		2.如果label属性值与value属性值相同，则不显示label属性值。
+    		3.支持datalist标签的浏览器会忽略其下除option之外的标签。
+    		4.list 属性适用于以下类型的 <input> 标签：text, search, url, tel, email, date pickers, number, range 以及 color。
+		-->
+		<section>
+			<h4>请选择相应的浏览器:</h4>
+			<input list="browser_list" type="text" />
+			<datalist id="browser_list">
+				<option value="Chrome" label="谷歌">
+				<option value="Firefox" label="火狐">
+				<option value="Internet Explorer" label="IE">
+				<option value="Opera" label="opera">
+				<option value="Safari" lable="Safari">
+				<option value="Microsoft Edge" label="IE Edge">
+			</datalist>
+		</section>
+		<section>
+			<h4>请输入您的邮箱：</h4>
+			<input list="email_list" type="text" id="email"/>
+			<datalist id="email_list">
+				<option value="*@qq.com">
+				<option value="*@vip.qq.com">
+				<option value="*@163.com">
+				<option value="*@gmail.com">
+				<option value="*@126.com">
+			</datalist>
+		</section>
+		<script>
+			let emaliList = document.getElementById("email_list"),
+				email = document.getElementById("email"),
+				innerHTML = emaliList.innerHTML,
+				emailData = Array.from(emaliList.getElementsByTagName("option"), option => option.value.replace("*@", ""));
+
+			email.addEventListener("input", () => replaceEmail(), false);
+
+			function replaceEmail() {
+				let val = email.value.trim().split("@");
+
+				if(val.length !== 2 || !emailData.includes(val[1])) {
+					emaliList.innerHTML = innerHTML.replace(/\*/g, val[0]);
+				};
+			}
+		</script>
+	</body>
+</html>
