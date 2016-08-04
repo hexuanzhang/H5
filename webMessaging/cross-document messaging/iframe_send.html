@@ -43,6 +43,7 @@
 		<script>
 			var form = document.querySelector("form");
 			form.onsubmit = function() {
+				// 支持IE8+
 				var message = document.querySelector(".content").value;
 				window.parent.frames[1].postMessage(message, '*');
 				return false;
