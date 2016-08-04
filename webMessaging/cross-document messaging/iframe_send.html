@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>iframe send</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style>
+			.p20
+			{
+				padding: 20px;
+			}
+			p
+			{
+				margin-bottom: 10px;
+			}
+			.content
+			{
+				height: 20px;
+			    line-height: 20px;
+			    padding: 5px 0 4px 3px;
+			    font-size: 14px;
+			}
+			.button
+			{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="p20">
+			<form action="">
+				<p>
+					<input type="text" class="content" required autofocus placeholder="请输入需要发送的内容">
+				</p>
+				<p>
+					<input type="submit" class="button">
+				</p>
+			</form>
+		</div>
+		<script>
+			var form = document.querySelector("form");
+			form.onsubmit = function() {
+				var message = document.querySelector(".content").value;
+				window.parent.frames[1].postMessage(message, '*');
+				return false;
+			}
+		</script>
+	</body>
+</html>
