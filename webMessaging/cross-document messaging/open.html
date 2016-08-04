@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>cross-document messaging</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style>
+			#message
+			{
+				padding: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="message">尚未接收到信息。</div>
+		<script>
+			// IE11-不支持
+			window.addEventListener("message", function(event){
+				document.querySelector("#message").innerHTML = event.data + " --皮卡丘";
+			},false);
+			window.addEventListener("load", function(event) {
+				// IE10-不支持event.currentTarget.opener
+				event.currentTarget.opener.postMessage("ready", "http://localhost:8098");
+			});
+			window.addEventListener("unload", function(event) {
+				event.currentTarget.opener.postMessage("closed", "http://localhost:8098");
+			});
+		</script>
+	</body>
+</html>
