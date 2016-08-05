@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>page visibility</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+	</head>
+	<body>
+		<p id="loginInfo"></p>
+		<script src="js/pageVisibility.js"></script>
+		<script>
+			let showInfo = () => {
+				let username = localStorage.getItem("username") || sessionStorage.getItem("username"),
+					oLogin = document.getElementById("loginInfo"),
+					tempStr = "";
+
+				if(username) {
+					tempStr = "欢迎回来, <em>" + username + "</em>";
+					sessionStorage.setItem("username", username);
+				} else {
+					tempStr = "您尚未登录, 请<a href='login.html' target='_blank'>登录</a>";
+				}
+
+				oLogin.innerHTML = tempStr;
+			};
+
+			showInfo();
+
+			pageVisibility.visibilityChange(() => {
+				this.hidden ? "" : showInfo();
+			});
+
+			window.addEventListener("unload", () => {
+				localStorage.clear();
+			});
+		</script>
+	</body>
+</html>

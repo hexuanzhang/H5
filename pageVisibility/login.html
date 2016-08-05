@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>login</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+	</head>
+	<body>
+		<form id="loginForm" action="" method="post">
+			<p>用户名：<input type="text" name="username" required /></p>
+			<p>密码：<input type="password" name="password" required /></p>
+			<p><input type="submit" /></p>
+		</form>
+		<script>
+			let loginForm = document.getElementById("loginForm");
+
+			loginForm.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				localStorage.setItem("username", document.querySelector("input[name='username']").value);
+				alert("登录成功！现在可以回到刚才的页面了！");
+				this.reset();
+			});
+		</script>
+	</body>
+</html>
