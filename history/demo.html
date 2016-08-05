@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>history pushstate demo</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style>
+			body {
+			    margin: 1em auto;
+			    max-width: 600px;
+			    background-color: #fff;
+			    border: solid 1px #aaa;
+			    padding: 15px;
+			    font-family: Georgia,serif;
+			}
+			.cf:before, .cf:after {
+			    content: "";
+			    display: table;
+			}
+			.cf:after {
+			    clear: both;
+			}
+			h1 {
+			    float: left;
+			    width: 30%;
+			    margin: 0;
+			    font-size: 18px;
+			}
+			nav {
+			    display: block;
+			    float: right;
+			    width: 45%;
+			}
+			ul {
+			    list-style: none;
+			    padding: 0;
+			    margin: 0;
+			}
+			li {
+			    display: inline-block;
+			    padding: 0;
+			    border-right: solid 1px #ccc;
+			}
+			a {
+			    color: #03a9f4;
+			    padding: 10px 18px;
+			    text-decoration: none;
+			    font-size: 18px;
+			}
+			#content {
+			    clear: left;
+			    float: left;
+			    width: 45%;
+			    margin-right: 10%;
+			    font-size: 20px;
+			}
+			#photo {
+			    float: right;
+			    width: 45%;
+			    margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body class="cf">
+		<h1>皮卡 皮卡 皮卡丘</h1>
+		<nav>
+			<ul>
+				<li>
+					<a href="/history/cute" data-key="cute">皮卡</a>
+				</li>
+				<li>
+					<a href="/history/flowers" data-key="flowers">皮卡</a>
+				</li>
+				<li>
+					<a href="/history/sleep" data-key="sleep">皮卡丘</a>
+				</li>
+			</ul>
+		</nav>
+		<p id="content"></p>
+		<img src="" id="photo">
+		<script>
+			let obj = document.getElementsByTagName("ul")[0],
+				href = location.href.split("?")[0],
+				pikachu = {
+					cute: {
+						content: "皮卡",
+						src: "/history/img/cute.jpg"
+					},
+					flowers: {
+						content: "皮卡",
+						src: "/history/img/flowers.jpg"
+					},
+					sleep: {
+						content: "皮卡丘",
+						src: "/history/img/sleep.jpg"
+					}
+				};
+
+			// 更新初始页state
+			if(history.replaceState) {
+				history.replaceState(pikachu.cute, document.title, href + "?key=cute");
+
+				updateContent(pikachu.cute);
+			}
+
+			// 监听onpopstate事件
+			window.addEventListener("popstate", (e) => {
+				console.info(history.state);
+			});
+
+			obj.addEventListener("click", (e) => {
+				let target = e.target,
+					tagName = target.tagName.toLowerCase(),
+					key = target.getAttribute("data-key"),
+					{[key]: data} = pikachu;
+
+				e.preventDefault();
+
+				if(tagName === "a") {
+					href = href.split("?")[0] + "?key=" + key;
+					history.pushState(data, document.title, href);
+
+					updateContent(data);
+				}
+			}, false);
+
+			// 更新页面展示
+			function updateContent(data) {
+				if(Object.keys(data).length) {
+					let oContent = document.getElementById("content"),
+						oImg = document.getElementById("photo");
+
+					oContent.textContent = data.content;
+					oImg.src = data.src;
+				}
+			}
+		</script>
+	</body>
+</html>
