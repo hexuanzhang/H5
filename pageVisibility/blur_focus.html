@@ -13,10 +13,11 @@
 			(function(){
 				var sTitle = document.title;
 
-				window.onblur = function(){
+				// 支持IE7+
+				window.onblur = function(){ // 页面焦点离开页面（如位于控制台）时触发
 					document.title = "你见， 或者不见我 我就在这里 不悲不喜";
 				}
-				window.onfocus = function(){
+				window.onfocus = function(){ // 页面获取焦点时触发
 					document.title = sTitle;
 				}
 			})();
