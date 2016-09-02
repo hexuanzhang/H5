@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>图像映射</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style>
+			area{
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- usemap 属性:将图像定义为客户端图像映射; 与 <map> 元素的 name 或 id 相关联。-->
+		<!-- <area> 标签定义图像映射中的区域 -->
+		<img src="./img/cute.jpg" alt="皮卡" usemap="#cute" width="200"  height="200"/>
+		<map name="cute" id="cute">
+			<area shape="rect" coords="0,0,200,200" href="https://www.github.com" target="_blank" alt="皮卡" title="github"/>
+		</map>
+
+		<img src="./img/flowers.jpg" alt="皮卡" usemap="#flowers" width="200"  height="200"/>
+	　　<map name="flowers" id="flowers">
+	　　　　<area shape="circle" coords="150,50,55" href ="https://www.github.com" target ="_blank" title="github"/>
+	　　　　<area shape="circle" coords="150,150,55" href ="https://www.github.com/issues" target ="_blank" title="issues"/>
+	　　　　<area shape="rect" coords="0,0,100,200" href ="https://gist.github.com/" target ="_blank"   title="gist"/>
+	　　</map>
+	</body>
+</html>
