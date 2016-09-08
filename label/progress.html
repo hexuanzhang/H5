@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>progress</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<!--[if IE]>
+		<script  src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<style>
+			progress {
+				display: inline-block;
+			    width: 160px;
+			    height: 20px;
+			    border: 1px solid #0064B4;  
+			    background-color:#e6e6e6;
+			    color: #0064B4; /*IE10*/
+			}
+
+			/*ie6-ie9*/
+			progress i {
+			    display:block;
+			    height: 100%;
+			    background: #0064B4;
+			}
+
+			progress::-moz-progress-bar { background: #0064B4; }
+			progress::-webkit-progress-bar { background: #e6e6e6; }
+			progress::-webkit-progress-value  { background: #0064B4; }
+		</style>
+	</head>
+	<body>
+		<label for="first">progress</label>
+		<progress max=100 value=60 id="first"></progress>
+		
+		<label for="second"></label>
+		<progress id="second">
+			<span id="objprogress">85</span>%
+		</progress>
+
+		<!-- 兼容IE处理 -->
+		<progress max="100" value="20">
+			<i style="width:20%;"></i>
+		</progress>
+
+		<script>
+			if (typeof window.screenX !== "number") {
+			    document.createElement("progress");		
+			}
+		</script>
+	</body>
+</html>
