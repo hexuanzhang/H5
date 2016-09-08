@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>geolocation </title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+	</head>
+	<body>
+		<div id="mapContainer"></div>
+		<script>
+			function getCurrentPosition(option){
+				var oGeolocation = navigator.geolocation;
+				if(oGeolocation){
+					var success_callback = option.locationSuccess,
+						error_callback = option.locationError;
+					oGeolocation.getCurrentPosition(success_callback, error_callback, {
+						// 指示浏览器获取高精度的位置，默认为false
+						enableHighAccuracy : option.enableHighAccuracy || false,
+						// 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+						timeout : option.timeout || 5000,
+						 // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+						maximumAge :  option.maximumAge || 3000
+					});
+				}else{
+					console.error("当前浏览器不支持定位！");
+				}
+			}
+
+			var  options = {
+				enableHighAccuracy : true,
+				locationSuccess : function(position){
+					var coords = position.coords,
+						latitude = coords.latitude, //纬度数值
+						longitude = coords.longitude, //经度数值
+						accuracy = coords.accuracy, //经纬度坐标的精度，以米为单位
+						altitude = coords.altitude, //海拔高度,以米为单位，如果没有则返回null
+						altitudeAccuracy = coords.altitudeAccuracy, //海拔高度的精度，以米为单位，数值越大越不精确
+						heading =  coords.heading, //指南针的方向，0°表示正北，如果没有则返回NaN或null
+						speed = coords.speed, //速度，每秒移动多少米，如果没有则返回NaN或null
+						timestamp = position.timestamp; //当位置捕获到时的时间戳
+					console.dir(position);
+				},
+				locationError : function(error){
+					switch(error.code){
+						case 0 :
+							console.error("尝试获取位置信息时发生错误：" + error.message);
+							break;
+						case 1 :
+							console.error("用户拒绝获取位置信息请求。");
+							break;
+						case 2 :
+							console.error("浏览器无法获取位置信息。");
+							break;
+						case 3 :
+							console.error("获取位置信息超时。");
+							break;
+					}
+				}
+
+			}
+			//获取位置
+			getCurrentPosition(options);
+		</script>
+	</body>
+</html>
