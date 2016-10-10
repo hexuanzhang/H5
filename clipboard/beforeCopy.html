@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>beforeCopy event</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link href="" rel="stylesheet">
+    </head>
+    <body>
+        <p>我已经原谅了从前的自己，就像谅解了一个野心勃勃的傻比，体恤了一个笨手笨脚的勇士，释怀了一个难以启齿的秘密。</p>
+        <script>
+            var clipboardData = "";
+            if(document.addEventListener) {
+                document.addEventListener("beforecopy", function(e) {
+                    clipboardData = window.clipboardData || e.clipboardData;
+                    console.log(clipboardData.getData("text"));
+                });
+            } else {
+                document.attachEvent("onbeforecopy", function(){
+                    clipboardData = window.clipboardData;
+                     console.log("复制的内容为：" + clipboardData.getData("text"));
+                })
+            }
+        </script>
+    </body>
+</html>
