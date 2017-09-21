@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <picture>
+        <source srcset="./img/mm-width-128px.jpg" media="(max-width: 1000px)">
+        <!-- 支持 picture 元素时的默认显示图片 -->
+        <source srcset="./img/mm-width-256px.jpg">
+        <!-- 不支持 picture 元素时回退方案 -->
+        <img srcset="./img/mm-width-256px.jpg" alt="">
+    </picture>
+</body>
+</html>
