@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        section {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-    <picture>
-        <source srcset="./img/mm-width-128px.jpg" media="(max-width: 1000px)">
-        <!-- 支持 picture 元素时的默认显示图片 -->
-        <source srcset="./img/mm-width-256px.jpg">
-        <!-- 不支持 picture 元素时回退方案 -->
-        <img srcset="./img/mm-width-256px.jpg" alt="">
-    </picture>
+    <section>
+        <h3>Picture 元素用法</h3>
+        <picture>
+            <source srcset="./img/mm-width-128px.jpg" media="(max-width: 1000px)">
+            <!-- 支持 picture 元素时的默认显示图片 -->
+            <source srcset="./img/mm-width-256px.jpg">
+            <!-- 不支持 picture 元素时回退方案 -->
+            <img srcset="./img/mm-width-256px.jpg" alt="">
+        </picture>
+    </section>
+
+    <section>
+        <h3>srcset 属性之以设备像素密度为标准</h3>
+        <img src="./img/image-1x.png" srcset="./img/image-2x.png 2x, ./img/image-3x.png 3x, ./img/image-4x.png 4x" alt="">
+    </section>
 </body>
 </html>
